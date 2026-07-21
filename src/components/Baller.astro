@@ -1,0 +1,105 @@
+---
+/** Goofy cartoon head. Deterministic variation driven by `seed`. */
+interface Props {
+  seed: number;
+  class?: string;
+}
+const { seed, class: cls = '' } = Astro.props;
+
+const skins = ['#F2A65A', '#EFB93B', '#E08A57', '#D9A05B', '#C98A4B', '#EAC08A', '#B9793F', '#F0B27A'];
+const jerseys = ['#C63B2C', '#122A47', '#F26522', '#2E6E5A'];
+
+const skin = skins[seed % skins.length];
+const jersey = jerseys[seed % jerseys.length];
+const hair = seed % 8;
+const eyes = seed % 4;
+const mouth = seed % 4;
+
+const S = '#16130F';
+---
+
+<svg viewBox="0 0 100 104" class={cls} role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <g stroke={S} stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- shoulders / jersey -->
+    <path d="M18 104 q4-16 32-16 t32 16" fill={jersey} />
+    <path d="M42 92 q8 7 16 0" fill="none" />
+
+    <!-- ears -->
+    <ellipse cx="17" cy="52" rx="6" ry="8" fill={skin} />
+    <ellipse cx="83" cy="52" rx="6" ry="8" fill={skin} />
+
+    <!-- head -->
+    <path d="M50 16 q30 0 30 30 t-30 38 q-30-8-30-38 t30-30z" fill={skin} />
+
+    <!-- hair -->
+    {hair === 0 && <path d="M22 40 q-4-22 28-24 t28 24 q-8-10-28-10 t-28 10z" fill={S} />}
+    {hair === 1 && (
+      <>
+        <path d="M21 40 q2-22 29-22 t29 22 q-10-8-29-8 t-29 8z" fill={S} />
+        <path d="M20 41 h60" stroke={jersey} stroke-width="9" />
+      </>
+    )}
+    {hair === 2 && <path d="M22 42 q1-24 28-24 t28 24 q-9-12-28-12 t-28 12z" fill="#3B3129" />}
+    {hair === 3 && <path d="M20 42 h60" stroke="#F3E7D3" stroke-width="10" />}
+    {hair === 4 && <path d="M20 38 v-8 q30-6 60 0 v8 q-10-8-30-8 t-30 8z" fill={S} />}
+    {hair === 5 && (
+      <>
+        <path d="M22 40 q2-22 28-22 t28 22 q-9-10-28-10 t-28 10z" fill="#4A3B2E" />
+        <circle cx="50" cy="12" r="9" fill="#4A3B2E" />
+      </>
+    )}
+    {hair === 6 && (
+      <>
+        <path d="M20 38 q30-24 60 0 z" fill={jersey} />
+        <path d="M20 38 h60" />
+        <path d="M20 36 q-9 2-9 8 q6 2 9-2z" fill={jersey} />
+      </>
+    )}
+    {hair === 7 && (
+      <>
+        <path d="M24 44 q0-26 26-26 t26 26 q-8-14-26-14 t-26 14z" fill="#2F2822" />
+        <path d="M30 62 q20 22 40 0 q-4 20-20 21 t-20-21z" fill="#2F2822" />
+      </>
+    )}
+
+    <!-- eyes -->
+    {eyes === 0 && (
+      <>
+        <circle cx="38" cy="54" r="3.4" fill={S} stroke="none" />
+        <circle cx="62" cy="54" r="3.4" fill={S} stroke="none" />
+      </>
+    )}
+    {eyes === 1 && (
+      <>
+        <path d="M33 54 q5-5 10 0" fill="none" />
+        <path d="M57 54 q5-5 10 0" fill="none" />
+      </>
+    )}
+    {eyes === 2 && (
+      <>
+        <circle cx="38" cy="54" r="7" fill="#F3E7D3" />
+        <circle cx="62" cy="54" r="7" fill="#F3E7D3" />
+        <circle cx="39" cy="55" r="3" fill={S} stroke="none" />
+        <circle cx="63" cy="55" r="3" fill={S} stroke="none" />
+      </>
+    )}
+    {eyes === 3 && (
+      <>
+        <circle cx="38" cy="55" r="3.4" fill={S} stroke="none" />
+        <circle cx="62" cy="55" r="3.4" fill={S} stroke="none" />
+        <path d="M56 44 q6-4 12 1" fill="none" />
+      </>
+    )}
+
+    <!-- mouth -->
+    {mouth === 0 && <path d="M39 68 q11 10 22 0" fill="none" />}
+    {mouth === 1 && <ellipse cx="50" cy="70" rx="9" ry="7" fill={S} stroke="none" />}
+    {mouth === 2 && <path d="M39 70 q11 4 22-4" fill="none" />}
+    {mouth === 3 && (
+      <>
+        <path d="M38 68 q12 9 24 0 z" fill={S} stroke="none" />
+        <path d="M38 68 h24" />
+      </>
+    )}
+  </g>
+</svg>

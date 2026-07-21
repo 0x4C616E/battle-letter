@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import Ball from '../components/Ball.astro';
+import Baller from '../components/Baller.astro';
+import { event, roster, tape, rules, mailto } from '../data/event';
+---
+
+<Base>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero__rays" aria-hidden="true"></div>
+    <div class="hero__dots" aria-hidden="true"></div>
+    <Ball class="hero__ball" />
+
+    <div class="container">
+      <div class="hero__stamp">Battle Letter&nbsp;·&nbsp;No.&nbsp;001&nbsp;·&nbsp;Challenge Accepted</div>
+
+      <h1 class="stroked">
+        Hoopers<span class="l2">Assemble</span>
+      </h1>
+
+      <p class="hero__lede">
+        <strong>{event.challenger}</strong> called us out. On a basketball court. In writing. The
+        {event.defenderLong} does not decline — so lace 'em up, we're running it back at them
+        <strong>{event.dayOfWeek.toLowerCase()}</strong>.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn" href={mailto}>I'm In →</a>
+        <a class="btn btn--ghost" href="#details">Where &amp; When</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VS BOARD ================= -->
+  <div class="vs-wrap halftone">
+    <div class="container vs">
+      <div class="vs__side">
+        <h3>{event.challenger}</h3>
+        <p>{event.challengerLong}</p>
+        <span class="vs__role">The Challenger</span>
+      </div>
+      <div class="vs__badge">VS</div>
+      <div class="vs__side">
+        <h3>{event.defender}</h3>
+        <p>{event.defenderLong}</p>
+        <span class="vs__role">Us. Obviously.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DETAILS ================= -->
+  <section class="sec" id="details">
+    <div class="container">
+      <div class="sec-head">
+        <h2>The Details</h2>
+        <span class="kicker">Know before you go</span>
+      </div>
+
+      <div class="cards">
+        <article class="panel card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="#16130F" stroke-width="4" aria-hidden="true">
+            <circle cx="24" cy="26" r="18" fill="#EFB93B" />
+            <path d="M24 16v10l7 5" stroke-linecap="round" />
+            <path d="M14 6 8 11M34 6l6 5" stroke-linecap="round" />
+          </svg>
+          <h3>When</h3>
+          <div class="card__big">{event.dayOfWeek}<br />{event.date}</div>
+          <p class="card__sub">
+            Tipoff <strong>{event.tipoff}</strong> ({event.tipoffPlain}), {event.year}.<br />
+            {event.shootaround}.
+          </p>
+        </article>
+
+        <article class="panel card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="#16130F" stroke-width="4" aria-hidden="true">
+            <path d="M24 44s14-14 14-25a14 14 0 1 0-28 0c0 11 14 25 14 25z" fill="#C63B2C" />
+            <circle cx="24" cy="19" r="5.5" fill="#F3E7D3" />
+          </svg>
+          <h3>Where</h3>
+          <div class="card__big">{event.venue}</div>
+          <p class="card__sub">
+            {event.venueLine2}.<br />
+            {event.venueAddress}
+          </p>
+        </article>
+
+        <article class="panel card">
+          <svg class="card__icon" viewBox="0 0 48 48" fill="none" stroke="#16130F" stroke-width="4" aria-hidden="true">
+            <rect x="5" y="15" width="38" height="26" rx="4" fill="#F26522" />
+            <path d="M18 15v-4a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v4" stroke-linecap="round" />
+            <path d="M5 26h38" />
+          </svg>
+          <h3>Bring</h3>
+          <ul>
+            {event.bring.map((b) => <li>{b}</li>)}
+          </ul>
+          <p class="card__sub" style="margin-top:.9rem">{event.format}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="zig" aria-hidden="true"></div>
+
+  <!-- ================= TALE OF THE TAPE ================= -->
+  <section class="sec tape-sec">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Tale of the Tape</h2>
+        <span class="kicker">Objectively unbiased analysis</span>
+      </div>
+
+      <div class="tape">
+        <div class="tape__row tape__row--head">
+          <div class="tape__a">{event.challenger}</div>
+          <div class="tape__label">Category</div>
+          <div class="tape__b">{event.defender}</div>
+        </div>
+        {
+          tape.map(([label, a, b]) => (
+            <div class="tape__row">
+              <div class="tape__a">{a}</div>
+              <div class="tape__label">{label}</div>
+              <div class="tape__b">{b}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="zig zig--up" aria-hidden="true"></div>
+
+  <!-- ================= ROSTER ================= -->
+  <section class="sec" id="roster">
+    <div class="container">
+      <div class="sec-head">
+        <h2>The Roster</h2>
+        <span class="kicker">Callsigns only — you know why</span>
+      </div>
+
+      <div class="roster">
+        {
+          roster.map((p, i) => (
+            <article class="baller">
+              <div class="baller__top">
+                <span class="baller__num">{p.num}</span>
+                <span class="baller__pos">{p.posShort}</span>
+                <Baller seed={i} class="baller__face" />
+              </div>
+              <div class="baller__body">
+                <h3>{p.name}</h3>
+                <div class="baller__role">{p.pos}</div>
+                <p class="baller__line">{p.line}</p>
+                <dl class="baller__stats">
+                  {p.stats.map(([k, v]) => (
+                    <div>
+                      <dt>{k}</dt>
+                      <dd>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="roster-note">
+        Spots still open. If your name isn't up there it's because you haven't emailed yet, not
+        because we forgot you. Probably.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= RULES ================= -->
+  <section class="sec rules-sec">
+    <div class="container">
+      <div class="bubble">"We'll take it easy on you." — {event.challenger}, allegedly</div>
+
+      <div class="sec-head">
+        <h2>Rules of Engagement</h2>
+        <span class="kicker">Signed, both parties</span>
+      </div>
+
+      <div class="rules">
+        {
+          rules.map((r) => (
+            <article class="rule">
+              <div class="rule__n">{r.n}</div>
+              <h3>{r.t}</h3>
+              <p>{r.d}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta">
+    <div class="cta__rays" aria-hidden="true"></div>
+    <div class="container">
+      <h2 class="stroked">Get On The List</h2>
+      <p>
+        One email. Name, position, jersey size. If you can dribble, you're in. If you can't dribble,
+        you're still in — we need bodies.
+      </p>
+      <a class="btn btn--gold" href={mailto}>Count Me In →</a>
+    </div>
+  </section>
+</Base>
