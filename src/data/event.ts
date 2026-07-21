@@ -13,8 +13,8 @@ export const event = {
   defenderLong: 'U.S. Coast Guard Red Team',
 
   // ---- when / where -----------------------------------------
-  dayOfWeek: 'THURSDAY', // TODO
-  date: 'JULY 30', // TODO
+  dayOfWeek: 'FRIDAY',
+  date: 'JULY 31',
   year: '2026', // TODO
   tipoff: '1800', // TODO  (24h, keeps the military flavor)
   tipoffPlain: '6:00 PM', // TODO
