@@ -16,9 +16,9 @@ export const event = {
   dayOfWeek: 'FRIDAY',
   date: 'JULY 31',
   year: '2026', // TODO
-  tipoff: '1800', // TODO  (24h, keeps the military flavor)
-  tipoffPlain: '6:00 PM', // TODO
-  shootaround: 'Doors + shootaround at 1730', // TODO
+  tipoff: '1100', // (24h, keeps the military flavor)
+  tipoffPlain: '11:00 AM',
+  shootaround: 'Doors + shootaround at 1030', // TODO confirm
 
   venue: 'THE GYM', // TODO
   venueLine2: 'Main court, far end', // TODO
