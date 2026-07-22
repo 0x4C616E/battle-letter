@@ -15,10 +15,30 @@ Lines marked `// TODO` are placeholders — swap these before you share the link
 
 | Field | What it is |
 | --- | --- |
-| `dayOfWeek`, `date`, `year` | Game date |
-| `tipoff`, `tipoffPlain`, `shootaround` | Times |
+| `start`, `end` | **The date and time, written once.** Local wall-clock, `YYYY-MM-DDTHH:MM`. |
+| `timeZone` | IANA zone, drives the calendar files. Currently `America/New_York`. |
 | `venue`, `venueLine2`, `venueAddress` | Location |
-| `rsvpEmail` | **The RSVP inbox.** Currently `hoops@example.com` — the buttons don't go anywhere useful until you change this. |
+| `shootaround` | Doors/warmup line |
+
+### The date is derived, not repeated
+
+The weekday (`WEDNESDAY`), display date (`JULY 29`), military time (`1100`), plain time
+(`11:00 AM`), the scrolling marquee, the `.ics`, and the Google Calendar link are **all computed
+from `start`/`end`** in [`src/lib/when.ts`](src/lib/when.ts). Change the date in one place and
+everything follows — the weekday cannot end up disagreeing with the date.
+
+Malformed values fail the build with a readable error instead of shipping a broken flyer.
+
+### Calendar output
+
+The "Save The Date" section has two buttons:
+
+- **Google Calendar** — opens a prefilled event the user still has to save
+- **Download .ics** — `/event.ics`, generated at build time by
+  [`src/pages/event.ics.ts`](src/pages/event.ics.ts). Outlook, Apple Calendar, everything else.
+
+Times are emitted as UTC (`20260729T150000Z`), derived from `timeZone` with real DST handling, so no
+`VTIMEZONE` block is needed and no offset is hardcoded. Change `timeZone` and the stamps recompute.
 
 `roster`, `tape`, and `rules` below it are the joke content — add, remove, or reorder freely. Roster
 names are intentionally fake callsigns; player card art auto-generates from list position, so you can

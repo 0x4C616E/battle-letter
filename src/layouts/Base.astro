@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { event } from '../data/event';
+import { when } from '../lib/when';
 
 interface Props {
   title?: string;
@@ -14,8 +15,8 @@ const year = new Date().getFullYear();
 const marquee = [
   'HOOPERS ASSEMBLE',
   `${event.challenger} VS ${event.defender}`,
-  `${event.dayOfWeek} ${event.date}`,
-  `TIPOFF ${event.tipoff}`,
+  `${when.dayOfWeek} ${when.date}`,
+  `TIPOFF ${when.tipoff}`,
   'CHALLENGE ACCEPTED',
   'BRING BOTH JERSEYS',
 ];

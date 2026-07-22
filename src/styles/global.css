@@ -742,6 +742,28 @@ p {
   font-size: 1.2rem;
 }
 
+.save {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.save .btn svg {
+  flex: none;
+}
+.save__note {
+  margin: 1.8rem auto 0;
+  font-size: 0.95rem;
+  opacity: 0.6;
+}
+.save__note code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: rgba(243, 231, 211, 0.16);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+}
+
 /* ---------- footer ---------- */
 
 footer {

@@ -12,14 +12,17 @@ export const event = {
   defender: 'USCG RED TEAM',
   defenderLong: 'U.S. Coast Guard Red Team',
 
-  // ---- when / where -----------------------------------------
-  dayOfWeek: 'FRIDAY',
-  date: 'JULY 31',
-  year: '2026', // TODO
-  tipoff: '1100', // (24h, keeps the military flavor)
-  tipoffPlain: '11:00 AM',
+  // ---- when -------------------------------------------------
+  // THE ONLY PLACE THE DATE/TIME IS WRITTEN. Local wall-clock time,
+  // format YYYY-MM-DDTHH:MM. The weekday, "JULY 29", "1100", "11:00 AM",
+  // the marquee, and the calendar files are all derived from these.
+  start: '2026-07-29T11:00',
+  end: '2026-07-29T13:00',
+  timeZone: 'America/New_York', // TODO confirm — drives the calendar files
+
   shootaround: 'Doors + shootaround at 1030', // TODO confirm
 
+  // ---- where ------------------------------------------------
   venue: 'THE GYM', // TODO
   venueLine2: 'Main court, far end', // TODO
   venueAddress: 'Address TBD — ask your captain', // TODO
@@ -27,19 +30,10 @@ export const event = {
   format: 'Runs to 21, win by 2. Best of 3.',
   bring: ['Light jersey AND dark', 'Actual basketball shoes', 'Water — the fountain is a myth', 'Zero excuses'],
 
-  // ---- RSVP -------------------------------------------------
-  rsvpEmail: 'hoops@example.com', // TODO  <-- put the real inbox here
-  rsvpSubject: "HOOPERS ASSEMBLE — I'm in (vs DTRA)",
-  rsvpBody: [
-    'Name / callsign:',
-    'Position:',
-    'Jersey size:',
-    'Can make the shootaround (Y/N):',
-    '',
-    'Trash talk I would like read aloud at tipoff:',
-    '',
-    '— sent from the battle letter',
-  ].join('\n'),
+  // ---- what lands in people's calendars ----------------------
+  calTitle: '🏀 USCG Red Team vs DTRA',
+  calDetails:
+    "DTRA threw down. We accepted. Bring a light jersey AND a dark one, actual basketball shoes, and water.\n\nRuns to 21, win by 2. Best of 3.",
 
   // ---- meta -------------------------------------------------
   siteTitle: 'HOOPERS ASSEMBLE — USCG Red Team vs DTRA',
